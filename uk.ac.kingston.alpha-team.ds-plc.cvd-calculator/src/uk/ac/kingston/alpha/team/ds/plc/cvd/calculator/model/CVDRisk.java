@@ -938,11 +938,73 @@ public class CVDRisk
         int comparativeRisk = 0;
         if(male)
         {
-            
+            if(age <= 34)
+            {
+                comparativeRisk = 3;
+            }
+            else if(age <= 39)
+            {
+                comparativeRisk = 5;
+            }
+            else if(age <= 44)
+            {
+                comparativeRisk = 7;
+            }
+            else if(age <= 49)
+            {
+                comparativeRisk = 11;
+            }
+            else if(age <= 54)
+            {
+                comparativeRisk = 14;
+            }
+            else if(age <= 59)
+            {
+                comparativeRisk = 16;
+            }
+            else if(age <= 64)
+            {
+                comparativeRisk = 21;
+            }
+            else if(age <= 69)
+            {
+                comparativeRisk = 25;
+            }
+            else if(age <= 74)
+            {
+                comparativeRisk = 30;
+            }
         }
         else
         {
-            
+            if(age <= 39)
+            {
+                comparativeRisk = 1;
+            }
+            else if(age <= 44)
+            {
+                comparativeRisk = 2;
+            }
+            else if(age <= 49)
+            {
+                comparativeRisk = 5;
+            }
+            else if(age <= 54)
+            {
+                comparativeRisk = 8;
+            }
+            else if(age <= 64)
+            {
+                comparativeRisk = 12;
+            }
+            else if(age <= 69)
+            {
+                comparativeRisk = 13;
+            }
+            else if(age <= 74)
+            {
+                comparativeRisk = 14;
+            }
         }
         return comparativeRisk;
     }

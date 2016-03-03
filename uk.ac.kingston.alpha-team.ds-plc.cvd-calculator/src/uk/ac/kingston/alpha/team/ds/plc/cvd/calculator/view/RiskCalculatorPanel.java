@@ -38,15 +38,16 @@ public final class RiskCalculatorPanel extends JPanel
     private static JComboBox genderComboBox;
     private static JComboBox smokingComboBox;
     private static JComboBox diabetesComboBox;
-    private static JComboBox bloodPressureComboBox;
     private static JComboBox totalCholesterolUnitComboBox;
     private static JComboBox HDLCholesterolUnitComboBox;
+    private static JComboBox CholesterolTypeComboBox;
     
     //ComboBox options
-    private final String[] genderStatusOptions = {"","Male","Female"};
-    private final String[] smokingStatusOptions = {"", "Yes", "No"};
-    private final String[] diabetesStatusOptions = {"", "Yes", "No"};
-    private final String[] cholesterolUnitOptions = {"", "mg/dL", "mmol/L"};
+    private final String[] genderStatusOptions = {"Male","Female"};
+    private final String[] smokingStatusOptions = {"Yes", "No"};
+    private final String[] diabetesStatusOptions = {"Yes", "No"};
+    private final String[] cholesterolUnitOptions = {"mg/dL", "mmol/L"};
+    private final String[] cholesterolTypeOptions = {"Total Cholesterol", "LDL Cholesterol"};
     
     private JButton calculateRiskButton; 
     private JButton clearButton;
