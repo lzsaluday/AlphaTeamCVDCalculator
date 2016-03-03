@@ -21,11 +21,12 @@ public class RiskCalculatorActionsListener implements ActionListener{
     
     public RiskCalculatorActionsListener(ApplicationViewer frame)
     {
-     this.frame = frame;    
+        this.frame = frame;    
     }
     
     @Override
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) 
+    {
         String command = ae.getActionCommand();
         
         if(command != null)
@@ -35,16 +36,38 @@ public class RiskCalculatorActionsListener implements ActionListener{
                 case "Risk Calculator":
                     frame.switchToRiskCalculatorPanel();
                     break;
-                case "Back to Main Menu":
-                    frame.exitRiskCaculator();
+                case "Options":
+                    frame.exitRiskCaculatorPanel();
                     break;
                 case "Calculate":
+                    //get age
                     int age = RiskCalculatorPanel.getAgeAsInt();
+                    //get male
                     boolean male = RiskCalculatorPanel.getMaleBoolean();
-                    int cholPoints = CVDRisk.calculateCholPoints(age, male, true, true, bloodPressure, command, totalCholesterol, command, hdlCholesterol, command);
-                    CVDRisk.calculateCVDRiskWithChol(cholPoints);
+                    //get smoker
+                    boolean smoker = RiskCalculatorPanel.getSmokerBoolean();
+                    //get diabetes
+                    boolean diabetes = RiskCalculatorPanel.getDiabetesBoolean();
+                    //get blood pressure (Systolic)
+                    double bloodPressure = RiskCalculatorPanel.getBloodPressureAsDouble();
+                    //get total cholesterol value
+                    double totalCholesterol = RiskCalculatorPanel.getTotalCholesterolAsDouble();
+                    //get total cholesterol unit (mg/dL or mmol/L)
+                    String totalCholesterolUnit = RiskCalculatorPanel.getTotalCholesterolUnit();
+                    //get hdl cholesterol value
+                    double hdlCholesterol = RiskCalculatorPanel.getHDLCholesterolAsDouble();
+                    //get hdl cholesterol unit (mg/dL or mmol/L)
+                    String hdlCholesterolUnit = RiskCalculatorPanel.getHDLCholesterolUnit();
+                    int cholPoints = CVDRisk.calculateCholPoints(age, male, smoker, diabetes, 
+                            bloodPressure, 
+                            totalCholesterol, totalCholesterolUnit, 
+                            hdlCholesterol, hdlCholesterolUnit);
+                    int cvdRisk = CVDRisk.calculateCVDRiskWithChol(male, cholPoints);
+                    int comparativeRisk = CVDRisk.comparativeRisk(male, age);
+                    frame.switchToRiskResultPanel(cvdRisk, comparativeRisk);
                     break;
                 case "Clear":
+                    RiskCalculatorPanel.clear();
                     break;
             }
         }

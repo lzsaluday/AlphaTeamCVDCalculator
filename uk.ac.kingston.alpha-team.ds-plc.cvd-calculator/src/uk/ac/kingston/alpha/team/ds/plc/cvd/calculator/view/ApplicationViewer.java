@@ -21,13 +21,14 @@ import javax.swing.border.EtchedBorder;
 public final class ApplicationViewer extends JFrame {
     
     private ApplicationMainPanel appMainMenu; 
-    private RiskCalculatorPanel rcp; 
+    private RiskCalculatorPanel rcp;
+    private RiskResultPanel rrp;
     private LoginPanel loginPanel;
     
     public ApplicationViewer()
     {
         this.loginPanel = new LoginPanel(this);
-        this.appMainMenu = new ApplicationMainPanel(this);
+        this.appMainMenu = new ApplicationMainPanel(this);       
         this.rcp = new RiskCalculatorPanel(this);
         setHeader();
         setFooter();
@@ -59,7 +60,7 @@ public final class ApplicationViewer extends JFrame {
         add(headerPanel, BorderLayout.PAGE_START);
     }
     
-     public void setFooter()
+    public void setFooter()
     {
         JPanel footerPanel = new JPanel();
         footerPanel.add(new JSeparator(JSeparator.TOP)); 
@@ -73,36 +74,53 @@ public final class ApplicationViewer extends JFrame {
     }
     
      
-     public void switchToRiskCalculatorPanel() 
-     {
-         remove(appMainMenu.mainMenuButtons);
-         add(rcp.riskCalculatorPanel);
-         revalidate();
-         repaint();
-     }
+    public void switchToRiskCalculatorPanel() 
+    {
+        remove(appMainMenu.mainMenuButtons);
+        add(rcp.riskCalculatorPanel);
+        revalidate();
+        repaint();
+    }
+    
+    public void exitRiskCaculatorPanel() 
+    {
+        remove(rcp.riskCalculatorPanel);
+        add(appMainMenu.mainMenuButtons);
+        revalidate();
+        repaint();
+    }
      
-     public void exitRiskCaculator() 
-     {
-         remove(rcp.riskCalculatorPanel);
-         add(appMainMenu.mainMenuButtons);
-         revalidate();
-         repaint();
-     }
+    public void switchToRiskResultPanel(int cvdRisk, int comparativeRisk)
+    {
+        this.rrp = new RiskResultPanel(this, cvdRisk, comparativeRisk);
+        remove(rcp.riskCalculatorPanel);
+        add(rrp.riskResultPanel);
+        revalidate();
+        repaint();
+    }
      
-     public void switchToLoginPanel() 
-     {
-         remove(appMainMenu.mainMenuButtons);
-         add(loginPanel.loginPanel);
-         revalidate();
-         repaint();
-     }
+    public void exitRiskResultPanel()
+    {
+        remove(rrp.riskResultPanel);
+        add(rcp.riskCalculatorPanel);
+        revalidate();
+        repaint();
+    }
      
-     public void exitLoginPanel()
-     {
-         remove(loginPanel.loginPanel);
-         add(appMainMenu.mainMenuButtons);
-         revalidate();
-         repaint();
-     }
+    public void switchToLoginPanel() 
+    {
+        remove(appMainMenu.mainMenuButtons);
+        add(loginPanel.loginPanel);
+        revalidate();
+        repaint();
+    }
+     
+    public void exitLoginPanel()
+    {
+        remove(loginPanel.loginPanel);
+        add(appMainMenu.mainMenuButtons);
+        revalidate();
+        repaint();
+    }
     
 }

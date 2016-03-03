@@ -30,28 +30,27 @@ public final class RiskCalculatorPanel extends JPanel
     
     //JTextFields
     private static JTextField ageTextField;
-    private JTextField bloodPressureTextField;
-    private JTextField totalCholesterolTextField;
-    private JTextField HDLCholesterolTextField;
+    private static JTextField bloodPressureTextField;
+    private static JTextField totalCholesterolTextField;
+    private static JTextField HDLCholesterolTextField;
     
     //JComboBoxes
     private static JComboBox genderComboBox;
-    private JComboBox smokingComboBox;
-    private JComboBox diabetesComboBox;
-    private JComboBox bloodPressureComboBox;
-    private JComboBox totalCholesterolUnitComboBox;
-    private JComboBox HDLCholesterolUnitComboBox;
+    private static JComboBox smokingComboBox;
+    private static JComboBox diabetesComboBox;
+    private static JComboBox bloodPressureComboBox;
+    private static JComboBox totalCholesterolUnitComboBox;
+    private static JComboBox HDLCholesterolUnitComboBox;
     
     //ComboBox options
     private final String[] genderStatusOptions = {"","Male","Female"};
     private final String[] smokingStatusOptions = {"", "Yes", "No"};
     private final String[] diabetesStatusOptions = {"", "Yes", "No"};
-    private final String[] bloodPressureOptions = {"", "Systolic","Diastolic"};
     private final String[] cholesterolUnitOptions = {"", "mg/dL", "mmol/L"};
     
     private JButton calculateRiskButton; 
     private JButton clearButton;
-    private JButton backButton;
+    private JButton optionsButton;
     private final ApplicationViewer frame;
     
     public RiskCalculatorPanel(ApplicationViewer frame)
@@ -130,7 +129,7 @@ public final class RiskCalculatorPanel extends JPanel
         constraints.gridwidth = 1;
         riskCalculatorPanel.add(diabetesComboBox, constraints);
         
-        bloodPressureLabel = new JLabel("Blood Pressure(mm Hg): ");
+        bloodPressureLabel = new JLabel("Systolic Blood Pressure(mm Hg): ");
         bloodPressureLabel.setFont(new Font("Calibri", Font.BOLD, 20));
         constraints.gridx = 0;
         constraints.gridy = 5;
@@ -143,13 +142,6 @@ public final class RiskCalculatorPanel extends JPanel
         constraints.gridy = 5;
         constraints.gridwidth = 1;
         riskCalculatorPanel.add(bloodPressureTextField, constraints);
-        
-        bloodPressureComboBox = new JComboBox(bloodPressureOptions);
-        bloodPressureComboBox.setFont(new Font("Calibri", Font.BOLD, 15));
-        constraints.gridx = 2;
-        constraints.gridy = 5;
-        constraints.gridwidth = 1;
-        riskCalculatorPanel.add(bloodPressureComboBox, constraints);
  
         totalCholesterolLabel = new JLabel("Total Cholesterol:  ");
         totalCholesterolLabel.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -210,16 +202,16 @@ public final class RiskCalculatorPanel extends JPanel
         constraints.gridy = 9;
         constraints.gridwidth = 0;
         riskCalculatorPanel.add(clearButton, constraints);
-        clearButton.addActionListener(new RiskCalculatorActionsListener(this.frame));
+        clearButton.addActionListener(new RiskCalculatorActionsListener(this.frame)); 
         
-        backButton = new JButton("Back to Main Menu");
-        backButton.setContentAreaFilled(false);
-        backButton.setFont(new Font("Calibri", Font.BOLD, 20));
+        optionsButton = new JButton("Options");
+        optionsButton.setContentAreaFilled(false);
+        optionsButton.setFont(new Font("Calibri", Font.BOLD, 20));
         constraints.gridx = 1;
         constraints.gridy = 10;
         constraints.gridwidth = 0;
-        riskCalculatorPanel.add(backButton, constraints);
-        backButton.addActionListener(new RiskCalculatorActionsListener(this.frame));
+        riskCalculatorPanel.add(optionsButton, constraints);
+        optionsButton.addActionListener(new RiskCalculatorActionsListener(this.frame)); 
         
         frame.add(riskCalculatorPanel);
     }
@@ -263,12 +255,12 @@ public final class RiskCalculatorPanel extends JPanel
         return male;
     }
     
-    public String getSmokingStatus() 
+    public static String getSmokingStatus() 
     {
         return (String) smokingComboBox.getSelectedItem();
     }
     
-    public boolean getSmokerBoolean()
+    public static boolean getSmokerBoolean()
     {
         String smokingStatus = getSmokingStatus();;
         boolean smoker = false;
@@ -291,12 +283,12 @@ public final class RiskCalculatorPanel extends JPanel
         return smoker;
     }
        
-    public String getDiabetesStatus() 
+    public static String getDiabetesStatus() 
     {
         return (String) diabetesComboBox.getSelectedItem();
     }
     
-    public boolean getDiabetesBoolean()
+    public static boolean getDiabetesBoolean()
     {
         String diabetesStatus = getDiabetesStatus();;
         boolean diabetes = false;
@@ -319,37 +311,47 @@ public final class RiskCalculatorPanel extends JPanel
         return diabetes;
     }
     
-    public String getBloodPressureString() 
+    public static String getBloodPressureString() 
     {
         return bloodPressureTextField.getText().trim();
     }
     
-    public String getBloodPressureType()
+    public static double getBloodPressureAsDouble()
     {
-        return (String) bloodPressureComboBox.getSelectedItem();
+        return Double.parseDouble(getBloodPressureString());
     }
-
-    public String getTotalCholesterolString() 
+    
+    public static String getTotalCholesterolString() 
     {
         return totalCholesterolTextField.getText().trim();
     }
     
-    public String getTotalCholesterolUnit()
+    public static double getTotalCholesterolAsDouble()
+    {
+        return Double.parseDouble(getTotalCholesterolString());
+    }
+    
+    public static String getTotalCholesterolUnit()
     {
         return (String) totalCholesterolUnitComboBox.getSelectedItem();
     }
     
-    public String getHDLCholesterolString() 
+    public static String getHDLCholesterolString() 
     {
         return HDLCholesterolTextField.getText().trim();
     }
     
-    public String getHDLCholesterolUnit()
+    public static double getHDLCholesterolAsDouble()
+    {
+        return Double.parseDouble(getHDLCholesterolString());
+    }
+    
+    public static String getHDLCholesterolUnit()
     {
         return (String) HDLCholesterolUnitComboBox.getSelectedItem();
     }
     
-    public void clear()
+    public static void clear()
     {
         ageTextField.setText("");
         bloodPressureTextField.setText("");
@@ -358,7 +360,6 @@ public final class RiskCalculatorPanel extends JPanel
         genderComboBox.setSelectedIndex(0);
         smokingComboBox.setSelectedIndex(0);
         diabetesComboBox.setSelectedIndex(0);
-        bloodPressureComboBox.setSelectedIndex(0);
         totalCholesterolUnitComboBox.setSelectedIndex(0);
         HDLCholesterolUnitComboBox.setSelectedIndex(0);
     }
