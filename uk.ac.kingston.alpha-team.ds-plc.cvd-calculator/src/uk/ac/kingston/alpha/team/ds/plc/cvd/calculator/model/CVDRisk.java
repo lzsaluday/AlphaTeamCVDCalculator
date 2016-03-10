@@ -876,7 +876,6 @@ public class CVDRisk
      * but it depends on the gender.
      * @param male
      * @param bloodPressure
-     * @param bloodPressureType
      * @return 
      */
     public static int getBloodPressurePoints(boolean male, double bloodPressure)

@@ -22,7 +22,6 @@ public final class RiskCalculatorPanel extends JPanel
     //JLabels
     private JLabel ageLabel;
     private JLabel genderLabel;
-    private JLabel totalCholesterolLabel;
     private JLabel smokerLabel;
     private JLabel diabetesLabel;
     private JLabel bloodPressureLabel;
@@ -31,16 +30,16 @@ public final class RiskCalculatorPanel extends JPanel
     //JTextFields
     private static JTextField ageTextField;
     private static JTextField bloodPressureTextField;
-    private static JTextField totalCholesterolTextField;
+    private static JTextField cholesterolTextField;
     private static JTextField HDLCholesterolTextField;
     
     //JComboBoxes
     private static JComboBox genderComboBox;
     private static JComboBox smokingComboBox;
     private static JComboBox diabetesComboBox;
-    private static JComboBox totalCholesterolUnitComboBox;
+    private static JComboBox cholesterolUnitComboBox;
     private static JComboBox HDLCholesterolUnitComboBox;
-    private static JComboBox CholesterolTypeComboBox;
+    private static JComboBox cholesterolTypeComboBox;
     
     //ComboBox options
     private final String[] genderStatusOptions = {"Male","Female"};
@@ -52,6 +51,7 @@ public final class RiskCalculatorPanel extends JPanel
     private JButton calculateRiskButton; 
     private JButton clearButton;
     private JButton optionsButton;
+    private JButton uploadButton;
     private final ApplicationViewer frame;
     
     public RiskCalculatorPanel(ApplicationViewer frame)
@@ -144,26 +144,26 @@ public final class RiskCalculatorPanel extends JPanel
         constraints.gridwidth = 1;
         riskCalculatorPanel.add(bloodPressureTextField, constraints);
  
-        totalCholesterolLabel = new JLabel("Total Cholesterol:  ");
-        totalCholesterolLabel.setFont(new Font("Calibri", Font.BOLD, 20));
+        cholesterolTypeComboBox = new JComboBox(cholesterolTypeOptions);
+        cholesterolTypeComboBox.setFont(new Font("Calibri", Font.BOLD, 15));
         constraints.gridx = 0;
         constraints.gridy = 6;
         constraints.gridwidth = 1;
-        riskCalculatorPanel.add(totalCholesterolLabel, constraints);
+        riskCalculatorPanel.add(cholesterolTypeComboBox, constraints);
  
-        totalCholesterolTextField = new JTextField(20);
-        totalCholesterolTextField.setFont(new Font("Calibri", Font.BOLD, 18));
+        cholesterolTextField = new JTextField(20);
+        cholesterolTextField.setFont(new Font("Calibri", Font.BOLD, 18));
         constraints.gridx = 1;
         constraints.gridy = 6;
         constraints.gridwidth = 1;
-        riskCalculatorPanel.add(totalCholesterolTextField, constraints);
+        riskCalculatorPanel.add(cholesterolTextField, constraints);
         
-        totalCholesterolUnitComboBox = new JComboBox(cholesterolUnitOptions);
-        totalCholesterolUnitComboBox.setFont(new Font("Calibri", Font.BOLD, 15));
+        cholesterolUnitComboBox = new JComboBox(cholesterolUnitOptions);
+        cholesterolUnitComboBox.setFont(new Font("Calibri", Font.BOLD, 15));
         constraints.gridx = 2;
         constraints.gridy = 6;
         constraints.gridwidth = 1;
-        riskCalculatorPanel.add(totalCholesterolUnitComboBox, constraints);
+        riskCalculatorPanel.add(cholesterolUnitComboBox, constraints);
         
         HDLCholesterolLabel = new JLabel("HDL Cholesterol: ");
         HDLCholesterolLabel.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -213,6 +213,15 @@ public final class RiskCalculatorPanel extends JPanel
         constraints.gridwidth = 0;
         riskCalculatorPanel.add(optionsButton, constraints);
         optionsButton.addActionListener(new RiskCalculatorActionsListener(this.frame)); 
+        
+        uploadButton = new JButton("Upload csv file");
+        uploadButton.setContentAreaFilled(false);
+        uploadButton.setFont(new Font("Calibri", Font.BOLD, 20));
+        constraints.gridx = 1;
+        constraints.gridy = 11;
+        constraints.gridwidth = 0;
+        riskCalculatorPanel.add(uploadButton, constraints);
+        uploadButton.addActionListener(new RiskCalculatorActionsListener(this.frame));
         
         frame.add(riskCalculatorPanel);
     }
@@ -322,19 +331,24 @@ public final class RiskCalculatorPanel extends JPanel
         return Double.parseDouble(getBloodPressureString());
     }
     
-    public static String getTotalCholesterolString() 
+    public static String getCholesterolType()
     {
-        return totalCholesterolTextField.getText().trim();
+        return (String) cholesterolTypeComboBox.getSelectedItem();
     }
     
-    public static double getTotalCholesterolAsDouble()
+    public static String getCholesterolString() 
     {
-        return Double.parseDouble(getTotalCholesterolString());
+        return cholesterolTextField.getText().trim();
     }
     
-    public static String getTotalCholesterolUnit()
+    public static double getcholesterolAsDouble()
     {
-        return (String) totalCholesterolUnitComboBox.getSelectedItem();
+        return Double.parseDouble(getCholesterolString());
+    }
+    
+    public static String getCholesterolUnit()
+    {
+        return (String) cholesterolUnitComboBox.getSelectedItem();
     }
     
     public static String getHDLCholesterolString() 
@@ -356,12 +370,13 @@ public final class RiskCalculatorPanel extends JPanel
     {
         ageTextField.setText("");
         bloodPressureTextField.setText("");
-        totalCholesterolTextField.setText("");
+        cholesterolTextField.setText("");
         HDLCholesterolTextField.setText("");
         genderComboBox.setSelectedIndex(0);
         smokingComboBox.setSelectedIndex(0);
         diabetesComboBox.setSelectedIndex(0);
-        totalCholesterolUnitComboBox.setSelectedIndex(0);
+        cholesterolTypeComboBox.setSelectedIndex(0);
+        cholesterolUnitComboBox.setSelectedIndex(0);
         HDLCholesterolUnitComboBox.setSelectedIndex(0);
     }
 }

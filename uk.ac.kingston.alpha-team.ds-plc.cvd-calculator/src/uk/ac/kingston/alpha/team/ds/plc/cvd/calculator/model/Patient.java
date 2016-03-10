@@ -9,13 +9,30 @@ package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model;
  *
  * @author k1317897
  */
-public class Patient extends User{
+public class Patient extends User
+{
+    
+    private String[] cvdResult;
 
-    public Patient() {
+    public Patient() 
+    {
     }
 
-    public Patient(String id, String firstname, String surname, String dob, String gender, String email, String contactNumber, String password, String addressLine1, String addressLine2, String city, String postcode) {
+    public Patient(String id, String firstname, String surname, String dob, 
+            String gender, String email, String contactNumber, String password, 
+            String addressLine1, String addressLine2, String city, String postcode) 
+    {
         super(id, firstname, surname, dob, gender, email, contactNumber, password, addressLine1, addressLine2, city, postcode);
+    }
+    
+    public void setCVDResult(String[] newResult)
+    {
+        cvdResult = newResult;
+    }
+    
+    public String[] getCVDResult()
+    {
+        return cvdResult;
     }
     
 }

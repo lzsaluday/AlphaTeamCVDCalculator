@@ -9,7 +9,8 @@ package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model;
  *
  * @author k1317897
  */
-public class User {
+public class User 
+{
     
     private String id; 
     private String firstname; 
@@ -27,11 +28,15 @@ public class User {
     /**
      * Class default constructor.
      */
-    public User() {
+    public User() 
+    {
         
     }
 
-    public User(String id, String firstname, String surname, String dob, String gender, String email, String contactNumber, String password, String addressLine1, String addressLine2, String city, String postcode) {
+    public User(String id, String firstname, String surname, String dob, 
+            String gender, String email, String contactNumber, String password, 
+            String addressLine1, String addressLine2, String city, String postcode) 
+    {
         this.id = id;
         this.firstname = firstname;
         this.surname = surname;
@@ -46,99 +51,123 @@ public class User {
         this.postcode = postcode;
     }
 
-    public String getId() {
+    public String getId() 
+    {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(String id) 
+    {
         this.id = id;
     }
 
-    public String getFirstname() {
+    public String getFirstname() 
+    {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstname(String firstname) 
+    {
         this.firstname = firstname;
     }
 
-    public String getSurname() {
+    public String getSurname() 
+    {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(String surname) 
+    {
         this.surname = surname;
     }
 
-    public String getDob() {
+    public String getDob() 
+    {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(String dob) 
+    {
         this.dob = dob;
     }
 
-    public String getGender() {
+    public String getGender() 
+    {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(String gender) 
+    {
         this.gender = gender;
     }
 
-    public String getEmail() {
+    public String getEmail() 
+    {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) 
+    {
         this.email = email;
     }
 
-    public String getContactNumber() {
+    public String getContactNumber() 
+    {
         return contactNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
+    public void setContactNumber(String contactNumber)
+    {
         this.contactNumber = contactNumber;
     }
 
-    public String getPassword() {
+    public String getPassword() 
+    {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) 
+    {
         this.password = password;
     }
 
-    public String getAddressLine1() {
+    public String getAddressLine1() 
+    {
         return addressLine1;
     }
 
-    public void setAddressLine1(String addressLine1) {
+    public void setAddressLine1(String addressLine1) 
+    {
         this.addressLine1 = addressLine1;
     }
 
-    public String getAddressLine2() {
+    public String getAddressLine2() 
+    {
         return addressLine2;
     }
 
-    public void setAddressLine2(String addressLine2) {
+    public void setAddressLine2(String addressLine2) 
+    {
         this.addressLine2 = addressLine2;
     }
 
-    public String getCity() {
+    public String getCity() 
+    {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(String city) 
+    {
         this.city = city;
     }
 
-    public String getPostcode() {
+    public String getPostcode() 
+    {
         return postcode;
     }
 
-    public void setPostcode(String postcode) {
+    public void setPostcode(String postcode) 
+    {
         this.postcode = postcode;
     }
 
