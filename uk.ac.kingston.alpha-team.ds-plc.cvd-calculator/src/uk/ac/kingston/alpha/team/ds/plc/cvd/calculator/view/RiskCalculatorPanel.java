@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.*;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller.RiskCalculatorActionsListener;
+import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 
 /**
  *
@@ -53,10 +54,12 @@ public final class RiskCalculatorPanel extends JPanel
     private JButton optionsButton;
     private JButton uploadButton;
     private final ApplicationViewer frame;
+    private final FileChooser fileChooser;
     
-    public RiskCalculatorPanel(ApplicationViewer frame)
+    public RiskCalculatorPanel(ApplicationViewer frame, FileChooser fileChooser)
     {
         this.frame = frame;
+        this.fileChooser = fileChooser;
         createRiskCalculatorPanel();
     }
     
@@ -221,7 +224,7 @@ public final class RiskCalculatorPanel extends JPanel
         constraints.gridy = 11;
         constraints.gridwidth = 0;
         riskCalculatorPanel.add(uploadButton, constraints);
-        uploadButton.addActionListener(new RiskCalculatorActionsListener(this.frame));
+        uploadButton.addActionListener(new RiskCalculatorActionsListener(this.frame,this.fileChooser));
         
         frame.add(riskCalculatorPanel);
     }

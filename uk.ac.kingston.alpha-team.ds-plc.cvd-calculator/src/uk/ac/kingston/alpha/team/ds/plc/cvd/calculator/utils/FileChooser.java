@@ -5,6 +5,7 @@
  */
 package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -15,10 +16,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FileChooser extends JFileChooser
 {
     private final FileNameExtensionFilter CSVFilter = new FileNameExtensionFilter("csv files", "csv");
+    private static JFileChooser fc;
     
     public FileChooser()
-    {
+    {      
         this.setFileFilter(CSVFilter);
+        this.setCurrentDirectory(new File(System.getProperty("user.home")));
         this.setMultiSelectionEnabled(true);
     }
+    
 }

@@ -5,6 +5,10 @@
  */
 package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 /**
  *
  * @author k1357811
@@ -1006,5 +1010,30 @@ public class CVDRisk
             }
         }
         return comparativeRisk;
+    }
+    
+    public static int[] calculateRiskFromFile(File[] selectedFiles)
+    {
+        int[] results = null;
+        for(File f: selectedFiles)
+        {
+            BufferedReader br;
+            try 
+            {
+                br = new BufferedReader(new FileReader(f));
+                String firstLine = br.readLine();
+                if (firstLine.startsWith("")) 
+                {
+                                
+                }
+                br.close();
+            } 
+            catch (Exception e) 
+            {
+                System.err.println("calculateRiskFromFile:: error with file "
+                        + f + ": " + e.getMessage());
+            }
+        }
+        return results;
     }
 }

@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 
 /**
  *
@@ -24,12 +25,14 @@ public final class ApplicationViewer extends JFrame {
     private RiskCalculatorPanel rcp;
     private RiskResultPanel rrp;
     private LoginPanel loginPanel;
+    private FileChooser fileChooser;
     
     public ApplicationViewer()
     {
+        this.fileChooser = new FileChooser();
         this.loginPanel = new LoginPanel(this);
         this.appMainMenu = new ApplicationMainPanel(this);       
-        this.rcp = new RiskCalculatorPanel(this);
+        this.rcp = new RiskCalculatorPanel(this,fileChooser);
         setHeader();
         setFooter();
         setTitle("NHS Cardiovascular Disease Calculator");

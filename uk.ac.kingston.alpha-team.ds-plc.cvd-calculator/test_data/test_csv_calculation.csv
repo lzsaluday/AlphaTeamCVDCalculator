@@ -1,0 +1,3 @@
+name,age,gender,smoker,diabetes,bloodPressure,cholesterolType,cholesterolValue,cholesterolUnit,hdlCholesterolValue,hdlCholesterolUnit
+Jack,45,Male,Yes,No,100,Total Cholesterol,160,mg/dL,55,mg/dL
+Linda,50,Female,No,Yes,130,LDL Cholesterol,3.37,mmol/L,1.40,mmol/L

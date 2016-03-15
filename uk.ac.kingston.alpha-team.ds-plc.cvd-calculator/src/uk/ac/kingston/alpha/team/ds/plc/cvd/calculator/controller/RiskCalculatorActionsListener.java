@@ -7,6 +7,7 @@ package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CVDRisk;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.ApplicationViewer;
@@ -20,10 +21,17 @@ public class RiskCalculatorActionsListener implements ActionListener
 {
 
     private ApplicationViewer frame; 
+    private FileChooser fileChooser;
     
     public RiskCalculatorActionsListener(ApplicationViewer frame)
     {
         this.frame = frame;    
+    }
+    
+    public RiskCalculatorActionsListener(ApplicationViewer frame, FileChooser fileChooser)
+    {
+        this.frame = frame;  
+        this.fileChooser = fileChooser;
     }
     
     @Override
@@ -42,7 +50,16 @@ public class RiskCalculatorActionsListener implements ActionListener
                     frame.exitRiskCaculatorPanel();
                     break;
                 case "Upload csv file":
-                    FileChooser fileChooser = new FileChooser();
+                    int result = fileChooser.showOpenDialog(frame);
+                    if (result == FileChooser.APPROVE_OPTION) 
+                    {
+                        File[] selectedFiles = fileChooser.getSelectedFiles();
+                        CVDRisk.calculateRiskFromFile(selectedFiles);
+                        for(File f : selectedFiles)
+                        {
+                            System.out.println("Selected file: " + f.getAbsolutePath());
+                        }
+                    }
                     break;
                 case "Calculate":
                     //get age

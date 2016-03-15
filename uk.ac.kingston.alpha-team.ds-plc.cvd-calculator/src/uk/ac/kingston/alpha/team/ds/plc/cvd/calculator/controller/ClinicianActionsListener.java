@@ -7,33 +7,36 @@ package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.ApplicationViewer;
 
 /**
  *
  * @author k1317897
  */
-public class ClinicianActionsListener implements ActionListener{
+public class ClinicianActionsListener implements ActionListener
+{
 
      private ApplicationViewer frame; 
-    
-    public ClinicianActionsListener(ApplicationViewer frame) 
+     
+     public ClinicianActionsListener(ApplicationViewer frame) 
     {
-     this.frame = frame;
-    }
+        this.frame = frame;
+    }  
     
     @Override
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) 
+    {
         String command = ae.getActionCommand();
-         if(command != null)
+        if(command != null)
         {
-         switch(command) 
-         {
-             case "Clinician":
-                 frame.switchToLoginPanel();
-                 break;
- 
-         }
+            switch(command) 
+            {
+                case "Clinician":
+                    frame.switchToLoginPanel();
+                    break;
+
+            }
         }
     }
     
