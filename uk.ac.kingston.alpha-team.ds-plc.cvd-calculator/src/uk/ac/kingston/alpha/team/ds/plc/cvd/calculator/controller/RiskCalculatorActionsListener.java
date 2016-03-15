@@ -8,6 +8,7 @@ package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CSVPatient;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CVDRisk;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.ApplicationViewer;
@@ -54,10 +55,46 @@ public class RiskCalculatorActionsListener implements ActionListener
                     if (result == FileChooser.APPROVE_OPTION) 
                     {
                         File[] selectedFiles = fileChooser.getSelectedFiles();
-                        CVDRisk.calculateRiskFromFile(selectedFiles);
-                        for(File f : selectedFiles)
+                        CSVPatient[] patients = CVDRisk.getPatientsFromFile(selectedFiles);
+                        String[] patientNames;
+                        int[] patientResults;
+                        for(CSVPatient p : patients)
                         {
-                            System.out.println("Selected file: " + f.getAbsolutePath());
+                            //get age
+                            int age = p.getAge();
+                            //get male
+                            boolean male = p.isMale();
+                            //get smoker
+                            boolean smoker = p.isSmoker();
+                            //get diabetes
+                            boolean diabetes = p.isDiabetes();
+                            //get blood pressure (Systolic)
+                            double bloodPressure = p.getBloodPressure();
+                            //get hdl cholesterol value
+                            double hdlCholesterol = p.getHdlCholesterolValue();
+                            //get hdl cholesterol unit (mg/dL or mmol/L)
+                            String hdlCholesterolUnit = p.getHdlCholesterolUnit();
+                            //get total cholesterol value
+                            double cholesterol = p.getCholesterolValue();
+                            //get total cholesterol unit (mg/dL or mmol/L)
+                            String cholesterolUnit = p.getCholesterolUnit();
+                            //get cholesterol type: Total/LDL
+                            String cholesterolType = p.getCholesterolType();
+                            
+                            switch(cholesterolType)
+                            {
+                                case "Total Cholesterol":
+                                    int cholPoints = CVDRisk.calculateCholPoints(age, male,
+                                        smoker, diabetes,
+                                        bloodPressure,
+                                        cholesterol, cholesterolUnit,
+                                        hdlCholesterol, hdlCholesterolUnit);
+                                    p.setCvdRisk(CVDRisk.calculateCVDRiskWithChol(male, cholPoints));
+                                    break;
+                                case "LDL Cholesterol":
+                                    
+                                    break;                               
+                            }
                         }
                     }
                     break;

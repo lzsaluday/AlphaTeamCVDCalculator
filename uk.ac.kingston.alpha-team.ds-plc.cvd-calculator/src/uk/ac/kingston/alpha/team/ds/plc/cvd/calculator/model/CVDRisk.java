@@ -1012,21 +1012,30 @@ public class CVDRisk
         return comparativeRisk;
     }
     
-    public static int[] calculateRiskFromFile(File[] selectedFiles)
+    public static CSVPatient[] getPatientsFromFile(File[] selectedFiles)
     {
-        int[] results = null;
+        final int MAX_PATIENTS = 50;
+        CSVPatient[] patients = new CSVPatient[MAX_PATIENTS];
+        int i = 0;
+        
         for(File f: selectedFiles)
         {
             BufferedReader br;
             try 
             {
                 br = new BufferedReader(new FileReader(f));
-                String firstLine = br.readLine();
-                if (firstLine.startsWith("")) 
+                
+                String firstLine = br.readLine(); //read and ignore firstline.
+                String nextLine;
+                
+                while((nextLine = br.readLine()) != null && i < MAX_PATIENTS)
                 {
-                                
+                    CSVPatient p = new CSVPatient(nextLine);
+                    
+                    patients[i] = p;
+                    
+                    i++;
                 }
-                br.close();
             } 
             catch (Exception e) 
             {
@@ -1034,6 +1043,6 @@ public class CVDRisk
                         + f + ": " + e.getMessage());
             }
         }
-        return results;
+        return patients;
     }
 }
