@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CSVPatient;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CVDRisk;
+import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.CSVUtils;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.ApplicationViewer;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.RiskCalculatorPanel;
@@ -55,9 +56,12 @@ public class RiskCalculatorActionsListener implements ActionListener
                     if (result == FileChooser.APPROVE_OPTION) 
                     {
                         File[] selectedFiles = fileChooser.getSelectedFiles();
-                        CSVPatient[] patients = CVDRisk.getPatientsFromFile(selectedFiles);
-                        String[] patientNames;
-                        int[] patientResults;
+                        int numberOfPatients = CSVUtils.getNumberOfPatients(selectedFiles);
+                        CSVPatient[] patients = CSVUtils.getPatientsFromFile(selectedFiles, numberOfPatients);
+                        String[] patientNames = new String[patients.length];
+                        int[] results = new int[patients.length];
+                        int i = 0;
+                        
                         for(CSVPatient p : patients)
                         {
                             //get age
@@ -92,10 +96,20 @@ public class RiskCalculatorActionsListener implements ActionListener
                                     p.setCvdRisk(CVDRisk.calculateCVDRiskWithChol(male, cholPoints));
                                     break;
                                 case "LDL Cholesterol":
-                                    
+                                    int ldlPoints = CVDRisk.calculateLDLPoints(age, male,
+                                        smoker, diabetes, bloodPressure,
+                                        cholesterol, cholesterolUnit,
+                                        hdlCholesterol, hdlCholesterolUnit);
+                                    p.setCvdRisk(CVDRisk.calculateCVDRiskWithLDL(male, ldlPoints));
                                     break;                               
                             }
+                            
+                            patientNames[i] = p.getName();
+                            results[i] = p.getCvdRisk();
+                            i++;
                         }
+                        
+                        frame.switchToCSVResultViewer(patientNames, results);
                     }
                     break;
                 case "Calculate":

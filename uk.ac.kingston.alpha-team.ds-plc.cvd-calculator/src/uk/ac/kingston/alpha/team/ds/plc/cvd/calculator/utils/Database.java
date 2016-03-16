@@ -19,12 +19,13 @@ public class Database {
     //Final static class attributes. 
     private static final String username = "k1234966";
     private static final String password = "database";
-    private static final String url = "";
+    private static final String url = "jdbc:oracle:thin:@kussdb.kingston.ac.uk:16450:ATPR";
     
     /**
      * Class default constructor.
      */
-    public Database() {
+    public Database() 
+    {
         
     }
     
@@ -34,14 +35,17 @@ public class Database {
      * queries can be executed. 
      * @return 
      */
-    public Connection establishConnection() 
+    public static Connection establishConnection() 
     {
        Connection connection = null;
-            try{
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            connection = DriverManager.getConnection(url, username, password);
-            return connection;
-            } catch(SQLException e) { 
+            try
+            {
+                DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+                connection = DriverManager.getConnection(url, username, password);
+                return connection;
+            } 
+            catch(SQLException e) 
+            { 
                 JOptionPane.showMessageDialog(null,"Connection could not be established!");
             }
             return connection;

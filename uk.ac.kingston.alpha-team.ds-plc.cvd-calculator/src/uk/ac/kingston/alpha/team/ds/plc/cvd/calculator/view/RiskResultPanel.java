@@ -12,6 +12,7 @@ import javax.swing.*;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller.RiskCalculatorActionsListener;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller.RiskResultActionListener;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CVDRisk;
+import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 
 /**
  *
@@ -21,7 +22,9 @@ public final class RiskResultPanel extends JPanel
 {
     public JPanel riskResultPanel;
     
-     //JLabels
+    private static int cvdRisk;
+    
+    //JLabels
     private JLabel riskLabel;
     private JLabel comparativeLabel;
     
@@ -29,10 +32,13 @@ public final class RiskResultPanel extends JPanel
     private JButton backButton;
     
     private final ApplicationViewer frame;
+    private final FileChooser fileChooser;
     
-     public RiskResultPanel(ApplicationViewer frame, int cvdRisk, int comparativeRisk)
+     public RiskResultPanel(ApplicationViewer frame, FileChooser fileChooser, int cvdRisk, int comparativeRisk)
     {
         this.frame = frame;
+        this.fileChooser = fileChooser;
+        this.cvdRisk = cvdRisk;
         createRiskResultPanel(cvdRisk, comparativeRisk);
     }
 
@@ -65,7 +71,7 @@ public final class RiskResultPanel extends JPanel
         constraints.gridy = 3;
         constraints.gridwidth = 1;
         riskResultPanel.add(saveButton, constraints);
-        saveButton.addActionListener(new RiskResultActionListener(this.frame));
+        saveButton.addActionListener(new RiskResultActionListener(this.frame, this.fileChooser));
  
         backButton = new JButton("Back");
         backButton.setContentAreaFilled(false);
@@ -77,5 +83,10 @@ public final class RiskResultPanel extends JPanel
         backButton.addActionListener(new RiskResultActionListener(this.frame));
         
         frame.add(riskResultPanel);
+    }
+    
+    private static int getCVDRisk()
+    {
+        return cvdRisk;
     }
 }

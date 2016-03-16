@@ -8,6 +8,7 @@ package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller;
 import java.io.File;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CSVPatient;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CVDRisk;
+import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.Database;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.ApplicationViewer;
 
 /**
@@ -21,18 +22,10 @@ public class Main {
      */
     public static void main(String[] args) 
     {
+        //Connect to db.
+        Database.establishConnection();
         //Initiate app with viewer.
-        //ApplicationViewer appViewer = new ApplicationViewer();
-        File f = new File("H:/Dependable Systems/"
-                + "uk.ac.kingston.alpha-team.ds-plc.cvd-calculator/"
-        + "uk.ac.kingston.alpha-team.ds-plc.cvd-calculator/test_data/test_csv_calculation.csv");
-        File[] files = new File[1];
-        files[0] = f;
-        CSVPatient[] patients = CVDRisk.getPatientsFromFile(files);
-        for(CSVPatient p : patients)
-        {
-            System.out.println(p + p.getCholesterolType());
-        }   
+        ApplicationViewer appViewer = new ApplicationViewer();    
         
     }
     

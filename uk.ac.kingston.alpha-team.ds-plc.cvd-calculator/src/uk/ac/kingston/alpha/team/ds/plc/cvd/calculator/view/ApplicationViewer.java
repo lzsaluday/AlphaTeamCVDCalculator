@@ -24,6 +24,7 @@ public final class ApplicationViewer extends JFrame {
     private ApplicationMainPanel appMainMenu; 
     private RiskCalculatorPanel rcp;
     private RiskResultPanel rrp;
+    private CSVResultViewer csvResultViewer;
     private LoginPanel loginPanel;
     private FileChooser fileChooser;
     
@@ -95,7 +96,7 @@ public final class ApplicationViewer extends JFrame {
      
     public void switchToRiskResultPanel(int cvdRisk, int comparativeRisk)
     {
-        this.rrp = new RiskResultPanel(this, cvdRisk, comparativeRisk);
+        this.rrp = new RiskResultPanel(this, fileChooser, cvdRisk, comparativeRisk);
         remove(rcp.riskCalculatorPanel);
         add(rrp.riskResultPanel);
         revalidate();
@@ -125,5 +126,23 @@ public final class ApplicationViewer extends JFrame {
         revalidate();
         repaint();
     }
+    
+    public void switchToCSVResultViewer(String[] patientNames, int[] results)
+    {
+        this.csvResultViewer = new CSVResultViewer(this, patientNames, results);
+        remove(rcp.riskCalculatorPanel);
+        add(csvResultViewer.CSVResultViewer);
+        revalidate();
+        repaint();
+    }
+    
+    public void exitCSVResultViewer()
+    {
+        remove(csvResultViewer.CSVResultViewer);
+        add(rcp.riskCalculatorPanel);
+        revalidate();
+        repaint();
+    }
+            
     
 }

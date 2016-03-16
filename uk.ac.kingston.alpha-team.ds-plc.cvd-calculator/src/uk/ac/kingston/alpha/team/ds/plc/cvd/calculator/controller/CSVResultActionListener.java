@@ -7,30 +7,19 @@ package uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.model.CVDRisk;
-import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.utils.FileChooser;
 import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.ApplicationViewer;
-import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.view.RiskResultPanel;
 
 /**
  *
  * @author k1357811
  */
-public class RiskResultActionListener implements ActionListener
+public class CSVResultActionListener implements ActionListener 
 {
     private ApplicationViewer frame; 
     
-    private FileChooser fileChooser;
-    
-    public RiskResultActionListener(ApplicationViewer frame)
+    public CSVResultActionListener(ApplicationViewer frame)
     {
-        this.frame = frame;
-    }
-    
-    public RiskResultActionListener(ApplicationViewer frame, FileChooser fileChooser)
-    {
-        this.frame = frame;
-        this.fileChooser = fileChooser;
+        this.frame = frame;    
     }
 
     @Override
@@ -42,11 +31,8 @@ public class RiskResultActionListener implements ActionListener
         {
             switch(command)
             {
-                case("Save"):
-                    int result = fileChooser.showSaveDialog(frame);
-                    break;
                 case("Back"):
-                    frame.exitRiskResultPanel();
+                    frame.exitCSVResultViewer();
                     break;
             }
         }

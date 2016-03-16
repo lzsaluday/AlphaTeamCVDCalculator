@@ -17,7 +17,8 @@ import uk.ac.kingston.alpha.team.ds.plc.cvd.calculator.controller.RiskCalculator
  *
  * @author k1317897
  */
-public class ApplicationMainPanel extends JPanel{
+public class ApplicationMainPanel extends JPanel
+{
     
     public JPanel mainMenuButtons;
     private JButton riskCalculatorButton; 
