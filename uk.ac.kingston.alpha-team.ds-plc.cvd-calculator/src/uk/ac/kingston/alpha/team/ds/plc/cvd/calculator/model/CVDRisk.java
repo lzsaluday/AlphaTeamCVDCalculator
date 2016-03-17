@@ -278,7 +278,13 @@ public class CVDRisk
         return points;
     }
     
-    //Specific to chol points calculation
+    /**
+     * Specific to chol points calculation
+     * @param male
+     * @param hdlCholesterol
+     * @param hdlCholesterolUnit
+     * @return 
+     */
     public static int getHDLCholPoints(boolean male, double hdlCholesterol, String hdlCholesterolUnit)
     {
         int points = 0;
@@ -387,6 +393,19 @@ public class CVDRisk
         return points;
     }
     
+    /**
+     * 
+     * @param age
+     * @param male
+     * @param smoker
+     * @param diabetes
+     * @param bloodPressure
+     * @param ldlCholesterol
+     * @param ldlCholesterolUnit
+     * @param hdlCholesterol
+     * @param hdlCholesterolUnit
+     * @return 
+     */
     public static int calculateLDLPoints(int age, boolean male, boolean smoker, 
             boolean diabetes, double bloodPressure,
             double ldlCholesterol, String ldlCholesterolUnit, 
@@ -402,6 +421,12 @@ public class CVDRisk
         return points;
     }
     
+    /**
+     * 
+     * @param male
+     * @param ldlPoints
+     * @return 
+     */
     public static int calculateCVDRiskWithLDL(boolean male, int ldlPoints)
     {
         int chdRisk = 0;
@@ -548,6 +573,13 @@ public class CVDRisk
         return chdRisk;
     }
     
+    /**
+     * Specific to LDL calculation.
+     * @param male
+     * @param ldlCholesterol
+     * @param ldlCholesterolUnit
+     * @return 
+     */
     public static int getLDLCholesterolPoints(boolean male, double ldlCholesterol, String ldlCholesterolUnit)
     {
         int points = 0;
@@ -632,6 +664,13 @@ public class CVDRisk
         return points;
     }
     
+    /**
+     * 
+     * @param male
+     * @param hdlCholesterol
+     * @param hdlCholesterolUnit
+     * @return 
+     */
     public static int getHdlLdlPoints(boolean male, double hdlCholesterol, String hdlCholesterolUnit)
     {
         int points = 0;
@@ -936,6 +975,12 @@ public class CVDRisk
         return points;
     }
     
+    /**
+     * Gives the average risk depending on the patients gender and age.
+     * @param male
+     * @param age
+     * @return 
+     */
     public static int comparativeRisk(boolean male, int age)
     {
         int comparativeRisk = 0;

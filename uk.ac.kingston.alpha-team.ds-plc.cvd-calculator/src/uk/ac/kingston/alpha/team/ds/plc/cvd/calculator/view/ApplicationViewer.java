@@ -28,6 +28,10 @@ public final class ApplicationViewer extends JFrame {
     private LoginPanel loginPanel;
     private FileChooser fileChooser;
     
+    /**
+     * Constructor calls methods to set the layout (setHeader and setFooter) 
+     * and creates the different necessary panels.
+     */
     public ApplicationViewer()
     {
         this.fileChooser = new FileChooser();
